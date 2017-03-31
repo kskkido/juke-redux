@@ -1,6 +1,6 @@
 import store from '../store.js';
 import React from 'react';
-import {setLyrics} from '../action-creators/lyrics.js'
+import {setLyrics, fetchLyrics} from '../action-creators/lyrics.js'
 import Lyrics from '../components/Lyrics.js'
 import axios from 'axios'
 
@@ -39,12 +39,19 @@ export default class LyricsContainer extends React.Component {
     })
   }
 
-  handleSubmit () {
-    axios.get(`/api/lyrics/${this.state.artistQuery}/${this.state.songQuery}`)
-    .then(lyrics => {
-      console.log(lyrics.data.lyric)
-      this.updateLyrics(lyrics.data.lyric)})
+  // handleSubmit () {
+  //   axios.get(`/api/lyrics/${this.state.artistQuery}/${this.state.songQuery}`)
+  //   .then(lyrics => {
+  //     console.log(lyrics.data.lyric)
+  //     this.updateLyrics(lyrics.data.lyric)})
+  // }
+
+  handleSubmit() {
+    if (this.state.artistQuery && this.state.songQuery) {
+      store.dispatch(fetchLyrics(this.state.artistQuery, this.state.songQuery));
+    }
   }
+
 
   render () {
 
