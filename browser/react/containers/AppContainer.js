@@ -10,13 +10,16 @@ import Album from '../components/Album';
 import Sidebar from '../components/Sidebar';
 import Player from '../components/Player';
 
+import store from '../store.js'
+
 import { convertAlbum, convertAlbums, convertSong, skip } from '../utils';
+import {setPlay, setPause, setCurrentSong, setCurrentSongList} from '../action-creators/player-action.js'
 
 export default class AppContainer extends Component {
 
   constructor (props) {
     super(props);
-    this.state = initialState;
+    this.state = Object.assign(initialState, store.getState());
 
     this.toggle = this.toggle.bind(this);
     this.toggleOne = this.toggleOne.bind(this);
@@ -55,14 +58,15 @@ export default class AppContainer extends Component {
     });
   }
 
+
   play () {
     AUDIO.play();
-    this.setState({ isPlaying: true });
+    store.dispatch(setPlay());
   }
 
   pause () {
     AUDIO.pause();
-    this.setState({ isPlaying: false });
+    store.dispatch(setPause());
   }
 
   load (currentSong, currentSongList) {
@@ -81,13 +85,13 @@ export default class AppContainer extends Component {
   }
 
   toggleOne (selectedSong, selectedSongList) {
-    if (selectedSong.id !== this.state.currentSong.id)
+    if (selectedSong.id !== this.state.player.currentSong.id)
       this.startSong(selectedSong, selectedSongList);
     else this.toggle();
   }
 
   toggle () {
-    if (this.state.isPlaying) this.pause();
+    if (this.state.player.isPlaying) this.pause();
     else this.play();
   }
 
@@ -209,12 +213,13 @@ export default class AppContainer extends Component {
         <Player
           currentSong={this.state.currentSong}
           currentSongList={this.state.currentSongList}
-          isPlaying={this.state.isPlaying}
+          isPlaying={this.state.player.isPlaying}
           progress={this.state.progress}
           next={this.next}
           prev={this.prev}
           toggle={this.toggle}
         />
+
       </div>
     );
   }

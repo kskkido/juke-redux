@@ -58,7 +58,7 @@ export default class LyricsContainer extends React.Component {
     return (
             <div>
               <h1>asdf</h1>
-              <Lyrics text = {this.state.text}
+              <Lyrics text = {this.state.lyrics.text}
                 setArtist = {this.setArtist}
                 setSong = {this.setSong}
                 artistQuery = {this.state.artistQuery}

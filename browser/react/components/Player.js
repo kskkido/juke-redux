@@ -2,6 +2,11 @@ import React from 'react';
 
 const Player = (props) => {
 
+  // currentSong={this.state.player.currentSong}
+  // currentSongList={this.state.player.currentSongList}
+  // isPlaying={this.state.player.isPlaying}
+  // progress={this.state.player.progress}
+
   const currentSong = props.currentSong;
   const currentSongList = props.currentSongList;
   const isPlaying = props.isPlaying;
