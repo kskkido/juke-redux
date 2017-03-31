@@ -19,6 +19,14 @@ const Sidebar = (props) => {
         </h4>
       </section>
       <hr />
+        <section>
+          <h4 className="text-muted">Lyrics</h4>
+          <h4>
+            <Link className="btn btn-primary btn-block" to="/lyrics">
+              <span className="glyphicon glyphicon-plus"></span> LYRIC
+            </Link>
+          </h4>
+        </section>
       <section>
         <h4 className="text-muted">PLAYLISTS</h4>
         <h4>
